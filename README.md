@@ -1,14 +1,14 @@
 # JianShu
 ## Features
 - [ ] Post
-    - [ ] Index
-    - [ ] Create
-    - [ ] Edit
-    - [ ] Delete
+    - [x] Index
+    - [x] Create
+    - [x] Edit
+    - [x] Delete
 - [ ] Auth
-    - [ ] Register
-    - [ ] Login
-    - [ ] Logout
+    - [x] Register
+    - [x] Login
+    - [x] Logout
 - [ ] Social
     - [ ] Follower
     - [ ] Following
@@ -19,4 +19,5 @@
 - [ ] Topic
 - [ ] Notification
 ## Todo
+- [ ] wangEditor
 ## Deployment
