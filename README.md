@@ -1,5 +1,5 @@
-#JianShu
-##Features
+# JianShu
+## Features
 - [ ] Post
     - [ ] Index
     - [ ] Create
@@ -18,5 +18,5 @@
 - [ ] Admin
 - [ ] Topic
 - [ ] Notification
-##Todo
-##deployment
+## Todo
+## Deployment
