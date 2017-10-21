@@ -10,10 +10,10 @@
     - [ ] Login
     - [ ] Logout
 - [ ] Social
-        - [ ] Follower
-        - [ ] Following
-        - [ ] Comments
-        - [ ] Thumbs up
+    - [ ] Follower
+    - [ ] Following
+    - [ ] Comments
+    - [ ] Thumbs up
 - [ ] Search
 - [ ] Admin
 - [ ] Topic
