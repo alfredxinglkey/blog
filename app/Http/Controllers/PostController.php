@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,7 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        $post->load('comments');
         return view('post.show', compact('post'));
     }
 
@@ -32,7 +34,7 @@ class PostController extends Controller
             'content' => 'required|min:10'
         ]);
 
-        $this->authorize('update', '$post');
+        $this->authorize('update', $post);
 
         $post->title = request('title');
         $post->content = request('content');
@@ -72,5 +74,23 @@ class PostController extends Controller
          $this->authorize('delete', $post);
          $post->delete();
          return redirect("/posts");
+    }
+
+    public function comment(Post $post)
+    {
+        //验证
+        $this->validate(\request(), [
+            'content' => 'required|min:3'
+        ]);
+
+        //逻辑
+        $comment = new Comment();
+        $comment->user_id = Auth::id();
+        $comment->content = \request('content');
+        $post->comments()->save($comment);
+        //渲染
+        return back();
+
+
     }
 }

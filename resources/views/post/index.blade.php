@@ -47,7 +47,6 @@
 
 
             </div><!-- /.blog-main -->
-
             @include('layout._sidebar')
         </div>
     </div>

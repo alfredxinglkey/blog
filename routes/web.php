@@ -33,3 +33,6 @@ Route::post('/user/me/setting', 'UserController@SettingStore');
 
 //文章模块
 Route::resource('posts', 'PostController');
+
+//评论模块
+Route::post('/posts/{post}/comment', 'PostController@comment');

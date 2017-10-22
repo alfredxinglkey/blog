@@ -3,31 +3,66 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-8 blog-main">
-                <div class="nav-tabs-custom">
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tab_1">
-                            <div class="blog-post" style="margin-top: 30px">
-                                <h2 class="blog-post-title">{{ $post->title }}</h2>
-                                <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} <a href="#">{{ $post->user->name }}</a></p>
-                                @can('update', $post)
-                                    <a class="btn btn-default" href="/posts/{{ $post->id }}/edit">编辑</a>
-                                @endcan
-                                @can('delete', $post)
-                                    <a class="btn btn-danger" href="/posts/{{ $post->id }}" onclick="event.preventDefault(); document.getElementById('delete').submit();">删除</a>
-                                    <form id="delete" action="/posts/{{$post->id}}" method="post" style="display: none;">
-                                        {{ method_field('delete') }}
-                                        {{ csrf_field() }}
-                                    </form>
-                                @endcan
-                                </p>
-                                <p>{{ $post->content }}</p>
-                            </div>
-                        </div>
+                <div class="blog-post">
+                    <div>
+                        <h2 class="blog-post-title">{{ $post->title }}</h2>
+                        @can('update', $post)
+                            <a class="btn btn-default" href="/posts/{{ $post->id }}/edit">编辑</a>
+                        @endcan
+                        @can('delete', $post)
+                            <a class="btn btn-danger" href="/posts/{{ $post->id }}" onclick="event.preventDefault(); document.getElementById('delete').submit();">删除</a>
+                            <form id="delete" action="/posts/{{$post->id}}" method="post" style="display: none;">
+                                {{ method_field('delete') }}
+                                {{ csrf_field() }}
+                            </form>
+                        @endcan
                     </div>
-                    <!-- /.tab-content -->
+
+                    <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }}<a href="#"> {{ Auth::user()->name}}</a></p>
+
+                    <p>{{ $post->content }}</p>
+                    <div>
+                        <a href="/posts/{{ $post->id }}/zan" type="button" class="btn btn-primary btn-lg">赞</a>
+
+                    </div>
                 </div>
+
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">评论</div>
+
+                    <!-- List group -->
+                    <ul class="list-group">
+                        @foreach($post->comments as $comment)
+                        <li class="list-group-item">
+                            <h5>{{ $comment->created_at }} by {{ $comment->user->name }}</h5>
+                            <div>
+                                {{ $comment->content }}
+                            </div>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">发表评论</div>
+
+                    <!-- List group -->
+                    <ul class="list-group">
+                        <form action="/posts/{{$post->id}}/comment" method="post">
+                            {{ csrf_field()}}
+
+                            <li class="list-group-item">
+                                <textarea name="content" class="form-control" rows="10"></textarea>
+                                @include('layout._errors')
+                                <button class="btn btn-default" type="submit">提交</button>
+                            </li>
+                        </form>
+                    </ul>
+                </div>
+
             </div><!-- /.blog-main -->
-            @include('layout._sidebar')
         </div>
     </div>
 @endsection
