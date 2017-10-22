@@ -12,7 +12,7 @@
 - [ ] Social
     - [ ] Follower
     - [ ] Following
-    - [ ] Comments
+    - [x] Comments
     - [ ] Thumbs up
 - [ ] Search
 - [ ] Admin
