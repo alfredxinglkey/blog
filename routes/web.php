@@ -30,9 +30,17 @@ Route::get('/logout', 'LoginController@logout');
 Route::get('/user/me/setting', 'UserController@setting');
 //个人设置操作
 Route::post('/user/me/setting', 'UserController@SettingStore');
-
 //文章模块
 Route::resource('posts', 'PostController');
-
 //评论模块
 Route::post('/posts/{post}/comment', 'PostController@comment');
+//赞模块
+//赞
+Route::get('posts/{post}/thumbup', 'PostController@thumbup');
+//取消赞
+Route::get('posts/{post}/unthumbup', 'PostController@unthumbup');
+
+//个人中心
+Route::post('/user/{user}/fan', 'UserController@fan');
+Route::post('/user/{user}/unfan', 'UserController@unfan');
+Route::get('/user/{user}', 'UserController@index');

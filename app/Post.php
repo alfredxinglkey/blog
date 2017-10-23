@@ -17,4 +17,14 @@ class Post extends Model
     {
         return $this->hasMany('App\Comment')->orderBy('created_at', 'desc');
     }
+    //用户点赞
+    public function thumbup($user_id)
+    {
+        return $this->hasOne('App\Thumbup')->where('user_id', $user_id);
+    }
+    //文章的所有赞
+    public function thumbups()
+    {
+        return $this->hasMany('App\Thumbup');
+    }
 }

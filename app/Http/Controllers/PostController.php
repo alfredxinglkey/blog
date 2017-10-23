@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Post;
+use App\Thumbup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,7 +12,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->paginate(6);
+        $posts = Post::orderBy('created_at', 'desc')->withCount(['comments', 'thumbups'])->paginate(6);
         return view('post.index', compact('posts'));
     }
 
@@ -90,7 +91,22 @@ class PostController extends Controller
         $post->comments()->save($comment);
         //渲染
         return back();
+    }
+    //赞
+    public function thumbup(Post $post)
+    {
+        $params = [
+            'user_id' => Auth::id(),
+            'post_id' => $post->id
+        ];
 
-
+        Thumbup::firstOrCreate($params);
+        return back();
+    }
+    //取消赞
+    public function unthumbup(Post $post)
+    {
+        $post->thumbup(Auth::id())->delete();
+        return back();
     }
 }

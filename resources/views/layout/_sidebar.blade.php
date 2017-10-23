@@ -6,15 +6,15 @@
 
         <ul class="category-root list-group">
             <li class="list-group-item">
-                <a href="/topic/1">旅游
+                <a href="#">Linux
                 </a>
             </li>
             <li class="list-group-item">
-                <a href="/topic/2">轻松
+                <a href="#">Web
                 </a>
             </li>
             <li class="list-group-item">
-                <a href="/topic/5">测试专题
+                <a href="#">Python
                 </a>
             </li>
         </ul>

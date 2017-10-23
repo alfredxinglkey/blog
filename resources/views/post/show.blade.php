@@ -18,12 +18,15 @@
                         @endcan
                     </div>
 
-                    <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }}<a href="#"> {{ Auth::user()->name}}</a></p>
+                    <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }}<a href="/user/{{$post->user->id}}"> {{ Auth::user()->name}}</a></p>
 
                     <p>{{ $post->content }}</p>
                     <div>
-                        <a href="/posts/{{ $post->id }}/zan" type="button" class="btn btn-primary btn-lg">赞</a>
-
+                        @if($post->thumbup(Auth::id())->exists())
+                            <a href="/posts/{{ $post->id }}/unthumbup" type="button" class="btn btn-default btn-lg">取消赞</a>
+                        @else
+                            <a href="/posts/{{ $post->id }}/thumbup" type="button" class="btn btn-primary btn-lg">赞</a>
+                        @endif
                     </div>
                 </div>
 
