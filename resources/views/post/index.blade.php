@@ -5,7 +5,7 @@
             <div class="blog-header">
             </div>
             <div class="col-sm-8">
-                <h1>{{ Auth::user()->name }}</h1><p>关注：{{ $user->stars_count }}｜粉丝：{{ $user->fans_count }}｜文章：{{ $user->posts_count }}</p>
+                {{--<h1>{{ Auth::user()->name }}</h1><p>关注：{{ $user->stars_count }}｜粉丝：{{ $user->fans_count }}｜文章：{{ $user->posts_count }}</p>--}}
             </div>
             <div class="col-sm-8 blog-main">
                 <div class="nav-tabs-custom">
