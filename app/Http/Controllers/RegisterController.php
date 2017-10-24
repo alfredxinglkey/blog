@@ -16,9 +16,9 @@ class RegisterController extends Controller
     {
         //验证
         $this->validate(\request(), [
-            'name' => 'required|min:3|unique:users,name',
+            'name' => 'required|min:1|unique:users,name',
             'email' => 'required|unique:users,email|email',
-            'password' => 'required|min:6|max:12|confirmed'
+            'password' => 'required|min:3|max:12|confirmed'
         ]);
         //逻辑
         $name = request('name');
