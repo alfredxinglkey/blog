@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Post;
 use App\Thumbup;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,8 +13,17 @@ class PostController extends Controller
 {
     public function index()
     {
+        //个人信息：关注数/粉丝数/文章数
+        $user = User::withCount(['posts', 'fans', 'stars'])->find(Auth::id());
+        //关注的用户列表：关注数/粉丝数/文章数
+        $stars = $user->stars;
+        $susers = User::whereIn('id', $stars->pluck('star_id'))->withCount(['posts', 'fans', 'stars'])->get();
+        //被关注用户列表：关注数/粉丝数/文章数
+        $fans = $user->fans;
+        $fusers = User::whereIn('id', $fans->pluck('fan_id'))->withCount(['posts', 'fans', 'stars'])->get();
+
         $posts = Post::orderBy('created_at', 'desc')->withCount(['comments', 'thumbups'])->paginate(6);
-        return view('post.index', compact('posts'));
+        return view('post.index', compact('user', 'posts', 'fusers', 'susers'));
     }
 
     public function show(Post $post)
